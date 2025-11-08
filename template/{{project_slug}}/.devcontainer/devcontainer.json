@@ -1,0 +1,16 @@
+{
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "redhat.vscode-yaml",
+        "mkhl.direnv",
+        "nix-community.nix-env-selector",
+        "weaveworks.vscode-gitops-tools",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "lunuan.kubernetes-templates"
+      ]
+    }
+  },
+  "image": "ghcr.io/cachix/devenv:latest",
+  "overrideCommand": false
+}

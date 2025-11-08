@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "prHourlyLimit": 10,
+  "prConcurrentLimit": 10,
+  "labels": [
+    "dependencies"
+  ],
+  "reviewers": [
+    "brpaz"
+  ],
+  "flux": {
+    "fileMatch": [
+      "\\.yaml$"
+    ]
+  },
+  "kubernetes": {
+    "fileMatch": [
+      "^infrastructure(/.*)?/.*\\.yaml$",
+      "^apps(/.*)?/.*\\.yaml$",
+      "^clusters(/.*)?/.*\\.yaml$"
+    ]
+  }
+}

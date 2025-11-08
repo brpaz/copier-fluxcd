@@ -1,0 +1,67 @@
+# https://taskfile.dev
+version: "3"
+
+vars:
+  KIND_CLUSTER_NAME: "{{ project_slug }}"
+
+dotenv: [".env"]
+
+tasks:
+  default:
+    cmds:
+      - task -l
+
+  dev:
+    desc: "Start a local Kubernetes cluster"
+    cmds:
+      - kind create cluster --name {% raw %}{{.KIND_CLUSTER_NAME}}{% endraw %}
+
+  stop:
+    desc: "Stop the local Kubernetes cluster"
+    cmds:
+      - kind delete cluster --name {% raw %}{{.KIND_CLUSTER_NAME}}{% endraw %}
+
+  lint:
+    desc: "Validate manifests"
+    cmds:
+      - scripts/validate.sh
+
+  lint-scripts:
+    desc: "Lint scripts"
+    cmds:
+      - shellcheck scripts/*.sh
+
+  flux-reconcille:
+    desc: "Reconcile Flux"
+    cmds:
+      - flux reconcile kustomization flux-system  --with-source
+
+  flux-status:
+    desc: "Check Flux status"
+    cmds:
+      - flux check
+
+  flux-kustomizations:
+    desc: "Get Flux Kustomization status"
+    cmds:
+      - flux get kustomizations --watch
+
+  gen-ssh-key:
+    desc: "Generate an SSH keypair"
+    cmds:
+      - mkdir -p .ssh
+      - ssh-keygen -t ed25519 -C "Kube Cluster" -f ./.ssh/kube -N ""
+
+  sops-encrypt:
+    desc: "Encrypt a Kubernetes secret using SOPS"
+    requires:
+      vars: [SECRET_FILE, KUBE_CLUSTER]
+    cmds:
+      - sops --encrypt --in-place --config ./clusters/${KUBE_CLUSTER}/.sops.yaml ${SECRET_FILE}
+
+  sops-decrypt:
+    desc: "Decrypt a Kubernetes secret using SOPS"
+    requires:
+      vars: [SECRET_FILE, KUBE_CLUSTER]
+    cmds:
+      - sops --config ./clusters/${KUBE_CLUSTER}/.sops.yaml ${SECRET_FILE}

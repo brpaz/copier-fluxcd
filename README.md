@@ -11,7 +11,12 @@
 
 ## 📦 What is included?
 
-TBD
+- [Devenv](https://devenv.sh/) to provision a consistent development environment
+- [Lefthook](https://github.com/evilmartians/lefthook) for Git hooks management
+- GitHub Actions for CI/CD
+- Pre-configured [FluxCD](https://fluxcd.io/) manifests, based on the [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example) repository
+- [Taskfile](https://taskfile.dev/) to manage common tasks
+- [Sops](https://github.com/mozilla/sops) for secrets management.
 
 ## 🚀 Getting Started
 

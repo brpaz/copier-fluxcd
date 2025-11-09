@@ -1,0 +1,60 @@
+# https://taskfile.dev
+
+version: "3"
+
+vars:
+
+tasks:
+  init:
+    desc: "Initialize terraform files"
+    cmds:
+      - terraform init {{.CLI_ARGS}}
+
+  fmt:
+    desc: "Format terraform files"
+    cmds:
+      - terraform fmt
+
+  validate:
+    desc: "Validate terraform files"
+    cmds:
+      - terraform validate
+
+  lint:
+    desc: "Lint terraform files"
+    cmds:
+      - tflint -f compact
+
+  plan:
+    desc: "Plan terraform files"
+    cmds:
+      - terraform plan -out=tfplan.out
+    generates:
+      - tfplan.out
+
+  apply:
+    desc: "Apply terraform files"
+    deps:
+      - plan
+    cmds:
+      - terraform apply -auto-approve tfplan.out && rm tfplan.out
+
+  destroy:
+    desc: "Destroy terraform resources"
+    cmds:
+      - terraform destroy -auto-approve
+
+  state:
+    desc: "Show terraform state"
+    cmds:
+      - terraform state list
+
+  graph:
+    desc: "Generate terraform graph"
+    cmds:
+      - terraform graph | dot -Tsvg > ../docs/terraform.svg
+
+  docs:
+    desc: "Generate terraform documentation"
+    cmds:
+      - terraform-docs .

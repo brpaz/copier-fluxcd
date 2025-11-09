@@ -1,0 +1,42 @@
+#cloud-config
+hostname: ${hostname}
+keyboard:
+  layout: pt
+swap:
+  filename: /swapfile
+  size: 2147483648 # 2GB
+users:
+  - name: ${ssh_user}
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ${ssh_key}
+
+ssh_pwauth: false
+disable_root: true
+package_update: true
+package_upgrade: true
+packages:
+  - fail2ban
+  - curl
+
+write_files:
+  - path: /etc/sysctl.d/99-custom-sysctl.conf
+    content: |
+      net.ipv4.ip_forward = 1
+      fs.file-max = 500000
+      fs.inotify.max_user_instances = 1280
+      fs.inotify.max_user_watches = 655360
+  - path: /etc/fail2ban/jail.local
+    content: |
+      [sshd]
+      enabled = true
+      port = ssh
+      logpath = %(sshd_log)s
+      maxretry = 10
+runcmd:
+  - systemctl enable --now fail2ban
+  - sysctl --system
+  # Install K3s Agent
+  - curl -sfL https://get.k3s.io | K3S_URL=https://${control_plane_ip}:6443 K3S_TOKEN=${node_token} sh -s -

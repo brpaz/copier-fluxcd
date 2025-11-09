@@ -19,6 +19,8 @@
     pkgs.sops
     pkgs.commitlint-rs
     pkgs.cilium-cli
+    pkgs.terraform
+    pkgs.tflint
   ];
 
   enterShell = ''

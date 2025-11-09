@@ -30,6 +30,10 @@ project_homepage:
   help: The homepage URL for your project.
   default: "https://github.com/{{ github_repository }}"
 
+include_terraform:
+  type: bool
+  help: Include Terraform configuration for infrastructure management?
+  default: true
 # Global tasks
 _tasks:
   - "git init"

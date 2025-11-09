@@ -1,0 +1,23 @@
+# Terraform
+# .terraform directories (Terraform keeps cached plugins and other files in here)
+.terraform
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+
+# .tfplan files
+*.tfplan
+
+# Ignore override files as they're usually used to override resources locally and so not checked in
+override.tf
+override.tf.json
+
+# Lock files
+*.lock.hcl
+
+## Output files
+*.out

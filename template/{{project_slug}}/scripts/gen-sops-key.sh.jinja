@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+# Script to generate a new GPG key to be used with SOPS
+# Reference: https://fluxcd.io/flux/guides/mozilla-sops/
+
+KEY_NAME="{{ project_slug }}@flux.brunopaz.dev"
+KEY_COMMENT="Sops Key for {{ project_slug }} managed by FluxCD"
+CLUSTER=${CLUSTER:-production}
+
+gpg --batch --full-generate-key <<EOF
+%no-protection
+Key-Type: 1
+Key-Length: 4096
+Subkey-Type: 1
+Subkey-Length: 4096
+Expire-Date: 0
+Name-Comment: ${KEY_COMMENT}
+Name-Real: ${KEY_NAME}
+EOF
+
+gpg --list-secret-keys "${KEY_NAME}"
+
+gpg --export --armor "${KEY_FP}" >./clusters/${CLUSTER}/.sops.pub.asc

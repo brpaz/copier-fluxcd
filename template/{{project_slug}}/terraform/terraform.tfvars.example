@@ -1,0 +1,8 @@
+hcloud_token         = "replaceme"
+project_name         = "k3s-cluster"
+ssh_pub_key          = "replaceme"
+ssh_priv_key_file    = ".replaceme"
+cloudflare_zone_id   = "replaceme"
+cloudflare_api_token = "replaceme"
+cloudflare_domain    = "replaceme"
+

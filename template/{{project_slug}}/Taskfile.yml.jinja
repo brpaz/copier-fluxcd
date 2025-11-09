@@ -6,6 +6,11 @@ vars:
 
 dotenv: [".env"]
 
+includes:
+  tf:
+    dir: terraform
+    taskfile: ./terraform/Taskfile.yml
+
 tasks:
   default:
     cmds:

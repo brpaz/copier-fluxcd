@@ -1,0 +1,18 @@
+formatter: "markdown"
+
+version: ""
+
+header-from: main.tf
+footer-from: ""
+content: ""
+
+output:
+  file: "../docs/terraform.md"
+  mode: replace
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    # Terraform Resources
+
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+

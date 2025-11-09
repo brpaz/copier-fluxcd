@@ -17,6 +17,7 @@
 - Pre-configured [FluxCD](https://fluxcd.io/) manifests, based on the [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example) repository
 - [Taskfile](https://taskfile.dev/) to manage common tasks
 - [Sops](https://github.com/mozilla/sops) for secrets management.
+- [Terraform](https://www.terraform.io/) configuration to provision the required infrastructure on [Hetzner Cloud](https://www.hetzner.com/cloud).
 
 ## 🚀 Getting Started
 

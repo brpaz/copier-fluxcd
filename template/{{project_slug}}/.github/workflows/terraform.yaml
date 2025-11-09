@@ -51,7 +51,7 @@ jobs:
           terraform_version: ${{ env.TF_VERSION }}
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - uses: terraform-linters/setup-tflint@v4
+      - uses: terraform-linters/setup-tflint@v6
         name: Setup TFLint
         with:
           tflint_version: ${{ env.TFLINT_VERSION }}

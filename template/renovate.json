@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
   ],
   "prHourlyLimit": 10,
   "prConcurrentLimit": 10,
@@ -22,9 +23,6 @@
       "^apps(/.*)?/.*\\.yaml$",
       "^clusters(/.*)?/.*\\.yaml$"
     ]
-  },
-  "github-actions": {
-    "pinDigests": true
   },
   "packageRules": [
     {

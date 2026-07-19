@@ -23,6 +23,9 @@
       "^clusters(/.*)?/.*\\.yaml$"
     ]
   },
+  "github-actions": {
+    "pinDigests": true
+  },
   "packageRules": [
     {
       "description": "Group and automerge non-major updates",

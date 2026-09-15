@@ -18,8 +18,8 @@ jobs:
         uses: helm/kind-action@06c1ae10762d3b9c1644e7fe69596ae519e015a2 # v1.15.0
         with:
           cluster_name: flux
-          version: v0.30.0
-          node_image: kindest/node:v1.33.4
+          version: v0.33.0
+          node_image: kindest/node:v1.37.0
       - name: Install Flux in Kubernetes Kind
         run: flux install --components-extra source-watcher
       - name: Setup cluster reconciliation
